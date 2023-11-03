@@ -18,5 +18,6 @@ node server.js
 
 Note:
 1. The basic logic of the api is to open a browser and interact with ChatGPT with vision on the webpage. Just like a human operator.
-2. Headless = false by default. When you run it for the first time, you need to log in your ChatGPT account manually in the browser opened by puppeteer and make sure the page is on https://chat.openai.com
+2. Headless = false by default. When you run it for the first time, you need to log in your ChatGPT account manually in the browser opened by puppeteer and make sure the page is on https://chat.openai.com like the image below:
+   ![image](./assets/demo.jpg)
 3. You may refer to test.py to see how to use the API
