@@ -1,0 +1,26 @@
+{
+  "name": "gpt-4v-api",
+  "version": "1.0.0",
+  "description": "Selenium based GPT-4V api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taogoddd/GPT-4V-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taogoddd/GPT-4V-API/issues"
+  },
+  "homepage": "https://github.com/taogoddd/GPT-4V-API#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "puppeteer": "^21.5.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
+  }
+}
