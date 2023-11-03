@@ -31,6 +31,6 @@ def send():
     print('Click send:', response.text)
 
 # Test the API
-upload_image('/Users/liuyitao/Documents/GitHub/GPT-4V-API/example.png')  # Upload an image (make sure to use the correct path)
+upload_image('/Users/liuyitao/Documents/GitHub/GPT-4V-API/assets/example.png')  # Upload an image (make sure to use the correct path)
 type_message('Explain this image to me')  # Send a message
 send()
