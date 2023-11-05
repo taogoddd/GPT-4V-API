@@ -28,6 +28,14 @@ class OpenAIChatController extends EventEmitter {
         await this.preparePage();
     }
 
+    async new_page() {
+        this.page = await this.browser.newPage();
+        await this.page.exposeFunction('emitEndTurn', (data) => this.emit('end_turn', data));
+
+        await this.page.goto('https://chat.openai.com/?model=gpt-4');
+        await this.preparePage();
+    }
+
     async preparePage() {
         await this.page.waitForSelector('input[type="file"]');
         await this.page.evaluate(() => {
