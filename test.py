@@ -31,6 +31,8 @@ def send():
     print('Click send:', response.text)
 
 # Test the API
+# create a new page if you want to start a new conversation
+# new_page()
 upload_image('<path to your image>')  # Upload an image (make sure to use the correct path)
 type_message('Explain this image to me')  # Send a message
 send()
