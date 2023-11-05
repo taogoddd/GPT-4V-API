@@ -8,7 +8,6 @@ app.use(express.json()); // Middleware to parse JSON bodies
 
 // Initialize the chat controller
 const chatController = new OpenAIChatController();
-chatController.initialize();
 // Endpoint to initialize the browser and page
 // app.post('/initialize', async (req, res) => {
 //     try {
@@ -27,6 +26,17 @@ chatController.on('end_turn', (content) => {
     // Send the response back to all pending clients
     pendingResponses.forEach(res => res.send(content));
     pendingResponses = []; // Clear the responses after sending
+});
+
+// Endpoint to initialize the page
+// this will open a new browser window of the chat and following requests will be in the same new chat
+app.post('/init', async (req, res) => {
+    try {
+        await chatController.initialize();
+        res.status(200).send('Initialized');
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
 });
 
 // Endpoint to send a message

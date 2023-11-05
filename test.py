@@ -3,6 +3,11 @@ import requests
 # The URL of your local API
 base_url = 'http://localhost:3000'
 
+# Initialize the page
+def init():
+    response = requests.post(f'{base_url}/init')
+    print('Init:', response.text)
+
 # Send a message
 def type_message(message):
     response = requests.post(
@@ -26,6 +31,7 @@ def send():
     print('Click send:', response.text)
 
 # Test the API
+init()  # Initialize the page
 upload_image('<path to your image>')  # Upload an image (make sure to use the correct path)
 type_message('Explain this image to me')  # Send a message
 send()
