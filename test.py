@@ -3,11 +3,6 @@ import requests
 # The URL of your local API
 base_url = 'http://localhost:3000'
 
-# Initialize the browser and page
-def initialize():
-    response = requests.post(f'{base_url}/initialize')
-    print('Initialize:', response.text)
-
 # Send a message
 def type_message(message):
     response = requests.post(
@@ -31,6 +26,6 @@ def send():
     print('Click send:', response.text)
 
 # Test the API
-upload_image('/Users/liuyitao/Documents/GitHub/GPT-4V-API/assets/example.png')  # Upload an image (make sure to use the correct path)
+upload_image('<path to your image>')  # Upload an image (make sure to use the correct path)
 type_message('Explain this image to me')  # Send a message
 send()
