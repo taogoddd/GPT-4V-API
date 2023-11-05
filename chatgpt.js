@@ -28,8 +28,19 @@ class OpenAIChatController extends EventEmitter {
         await this.preparePage();
     }
 
-    async new_page() {
+    async newPage(closeOtherTabs = true) {
         this.page = await this.browser.newPage();
+        if (closeOtherTabs) {
+            // Get all the pages in the browser
+            const pages = await this.browser.pages();
+            
+            // Close all pages except the current one
+            await Promise.all(pages.map(page => {
+                if (page !== this.page) {
+                    return page.close();
+                }
+            }));
+        }
         await this.page.exposeFunction('emitEndTurn', (data) => this.emit('end_turn', data));
 
         await this.page.goto('https://chat.openai.com/?model=gpt-4');
@@ -75,6 +86,18 @@ class OpenAIChatController extends EventEmitter {
             throw new Error('You need to initialize first');
         }
         await this.page.type('#prompt-textarea', text.split('\n').join(';'));
+    }
+
+    async clickNewChatButton() {
+        if (!this.page) {
+            throw new Error('You need to initialize first');
+        }
+        const selector = 'a > span';
+        await this.page.waitForSelector(selector);
+        await this.page.evaluate(selector => {
+        const button = [...document.querySelectorAll(selector)].find(element => element.textContent.includes('New Chat'));
+        if (button) button.click();
+        }, selector);
     }
 
     async clickSendButton() {

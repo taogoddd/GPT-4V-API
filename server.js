@@ -33,8 +33,21 @@ chatController.on('end_turn', (content) => {
 // this will open a new browser window of the chat and following requests will be in the same new chat
 app.post('/new_page', async (req, res) => {
     try {
-        await chatController.new_page();
+        // read request
+        const { closeOtherTabs } = req.body;
+        
+        await chatController.newPage(closeOtherTabs);
         res.status(200).send('New page created');
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+// Endpoint to click new chat button
+app.post('/new_chat', async (req, res) => {
+    try {
+        await chatController.clickNewChatButton();
+        res.status(200).send('New chat clicked');
     } catch (error) {
         res.status(500).send(error.message);
     }
@@ -77,7 +90,7 @@ app.post('/send', async (req, res) => {
                 res.send('Timeout: No response received.');
                 pendingResponses = pendingResponses.filter(r => r !== res);
             }
-        }, 30000); // 30-second timeout
+        }, 60000); // 30-second timeout
 
     } catch (error) {
         res.status(500).send(error.message);
