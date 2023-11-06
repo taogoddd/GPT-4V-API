@@ -85,7 +85,7 @@ class OpenAIChatController extends EventEmitter {
         if (!this.page) {
             throw new Error('You need to initialize first');
         }
-        await this.page.type('#prompt-textarea', text.split('\n').join(';'));
+        await this.page.type('#prompt-textarea', text);
     }
 
     async clickNewChatButton() {
