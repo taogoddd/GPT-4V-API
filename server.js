@@ -1,5 +1,6 @@
 const express = require('express');
 const OpenAIChatController = require('./chatgpt'); // Import your class
+const ngrok = require('ngrok'); // Import ngrok
 
 const app = express();
 const port = 3000; // You can use any port that is free on your system
@@ -27,6 +28,24 @@ chatController.on('end_turn', (content) => {
     // Send the response back to all pending clients
     pendingResponses.forEach(res => res.send(content));
     pendingResponses = []; // Clear the responses after sending
+});
+
+// Start the server
+app.listen(port, async () => {
+    console.log(`Server running on port ${port}`);
+    
+    // (Optional) Start ngrok tunnel to expose the port
+    // try {
+    //     const url = await ngrok.connect({
+    //         proto: 'http', // http|tcp|tls, defaults to http
+    //         addr: port, // port or network address, defaults to 80
+    //         authtoken: '2XmsdAs8reYjtFEMmPTb7Vgg7Qj_29gyC5cJU4TjqHgcVVjAQ', // your ngrok authtoken from ngrok.com
+    //         region: 'us' // one of ngrok's regions (us, eu, au, ap), defaults to us
+    //     });
+    //     console.log(`ngrok tunnel set up: ${url}`);
+    // } catch (error) {
+    //     console.error(`Error occurred while trying to connect ngrok tunnel: ${error.message}`);
+    // }
 });
 
 // Endpoint to initialize the page
@@ -105,9 +124,4 @@ app.post('/close', async (req, res) => {
     } catch (error) {
         res.status(500).send(error.message);
     }
-});
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
 });
