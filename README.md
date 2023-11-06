@@ -22,6 +22,14 @@ Note:
 2. Headless = false by default. When you run it for the first time, you need to log in your ChatGPT account manually in the browser opened by puppeteer and make sure the page is on https://chat.openai.com like the image below. After log in for the first time, your browser user data will be stored at ./user_data and you can change the headless to "new" (https://developer.chrome.com/articles/new-headless/) to use the headless mode:
    ![image](./assets/demo.jpg)
 3. You may refer to test.py and the comments of functions to see how to use the API
+4. To run on Ubuntu or other Linux systems, you may need to install xvfb.
+```bash
+sudo apt-get install xvfb x11-apps x11-xkb-utils libx11-6 libx11-xcb1
+```
+remember to launch it each time you use headless=false
+```bash
+Xvfb -ac :99 -screen 0 1280x1024x16 & export DISPLAY=:99
+```
 
 ## Star History
 
